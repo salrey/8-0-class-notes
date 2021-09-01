@@ -131,3 +131,62 @@ function callsWithName(name, sayHiOrBye) {
 
 callsWithName("Felicia", saysHi); //> Hi Felicia
 callsWithName("Felicia", saysBye); //> Bye Felicia 
+
+//Anonymous Function - no name and don't always need to store in variable, unless you want to keep track of it 
+function whatHappened() {
+    //closure 
+    return function () {
+        return "Four nations lived..."
+    }
+}
+//OR 
+function whatHappened() {
+    return function (text) {
+        return text
+    }
+}
+
+//OR 
+
+let firstThing  = function whatHappened() {
+    return function (text) {
+        return text
+    }
+}
+
+console.log(firstThing()("Four nations lived..."))
+
+console.log(whatHappened("Four nations lived...")); //> function //> logs anon function because this isn't invoked inside whatHappened function, so need to set into variable and then invoke to get result
+
+let firstFunc = whatHappened()
+let secondFunc = firstFunc ("Four nations lived...")
+console.log(secondFunc) //> Four nations lived...
+
+//invoking anonymous function without a variable - add () after the function and then wrap function parens - eg. (anon function())
+// console.log((() => {
+//     return 5;
+// })()); //> 5 
+//OR 
+//this works also ….console.log((() => 5)()) Because  of Implicit return
+
+//Transform function are higher order function because it takes in function and returns function
+function transform (text, fn) {
+    if (typeof fn !== "function") {
+        return text
+    }
+    return fn(text);
+}
+
+//Create callback functions so that transform function will take fn as are argument 
+// 'left' -> "LEFT"
+function capitalize (text) {
+    return text.toUpperCase()
+}
+
+//left right left -> left-right-left
+
+
+//up Down left -> UDL
+
+
+console.log(transform('left', capitalize)); //> LEFT
