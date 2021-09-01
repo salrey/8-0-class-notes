@@ -93,5 +93,41 @@ console.log(first) //> function inner
 let second = first()
 console.log(second) //> I'm the inner function
 
+// Function as parameter
+function go(goLeft = true, leftFunc, rightFunc) {
+    return goLeft ? leftFunc : rightFunc;
+};
 
-  
+// console.log(go(false, left, right())()); //> go(...) is not a function because you can't invoke a string "Right"
+console.log(go(false, left, right)()); //> Right //> Here's it'll return the function and then invoke it ()
+
+//Higher Order Function as a wrapper function- function taking in an argument as a function 
+function whatHappened(fn) {
+    const result = "Four nations lived..." 
+    //taking the function value parameter and then invoke in the result 
+    fn(result);
+}
+//Not a higher order function, 
+function logger(text) {
+    console.log("LOGGING: ", text)
+}
+
+//here we will invoke logger function in the whatHappened function via parameter => fn(result)
+console.log(whatHappened(logger)); //> LOGGING: Four nations lived... //>returning undefined 
+
+//Callback function 
+function saysHi(name) {
+    console.log('Hi', name);
+}
+
+function saysBye(name) {
+    console.log('Bye', name);
+}
+
+function callsWithName(name, sayHiOrBye) {
+    //Callback function (it'll take in a function as an argument)
+    sayHiOrBye(name)
+}
+
+callsWithName("Felicia", saysHi); //> Hi Felicia
+callsWithName("Felicia", saysBye); //> Bye Felicia 
