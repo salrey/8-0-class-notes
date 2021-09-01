@@ -184,9 +184,20 @@ function capitalize (text) {
 }
 
 //left right left -> left-right-left
-
+function addDashes (text) {
+    return text.split(" ").join("-")
+}
 
 //up Down left -> UDL
-
+function firstLetters (text) {
+    const elements = text.split(" ")
+    let string = ""
+    for (const element of elements) {
+        string += element[0]
+    }
+    return string.toUpperCase()
+}
 
 console.log(transform('left', capitalize)); //> LEFT
+console.log(transform('left right left', addDashes)); //> left-right-left
+console.log(transform('up Down left', firstLetters)); //> UDL
